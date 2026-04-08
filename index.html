@@ -2,84 +2,116 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <title>ArteEducar Pequenos Artistas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArteEducar Apps</title>
+
   <style>
     body {
-      font-family: Arial;
-      background: #f2f6ff;
-      text-align: center;
-      padding: 20px;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
     }
-    h1 {
-      color: #2b4eff;
-    }
-    .app {
-      background: white;
-      padding: 15px;
-      margin: 15px auto;
-      border-radius: 12px;
-      width: 280px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 15px;
-      background: #2b4eff;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-    /* Estilo especial para o botão de download principal */
-    .download-btn {
-      display: inline-block;
-      padding: 12px 20px;
+
+    header {
       background: #22c55e;
       color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .app-card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .app-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+    }
+
+    .app-name {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .app-desc {
+      color: #555;
+      margin: 10px 0 20px;
+    }
+
+    .btn-download {
+      display: inline-block;
+      padding: 14px 22px;
+      background: #22c55e;
+      color: white;
+      font-size: 16px;
       font-weight: bold;
       border-radius: 10px;
       text-decoration: none;
-      margin: 20px auto;
-      font-size: 18px;
     }
-    .aviso-android {
-      background: #fff3cd;
-      color: #856404;
-      padding: 10px;
-      border-radius: 8px;
-      margin: 10px auto;
-      display: inline-block;
+
+    .btn-download:hover {
+      background: #16a34a;
     }
+
+    .warning {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #888;
+    }
+
   </style>
 </head>
+
 <body>
 
-  <h1>📚 ArteEducar Apps</h1>
+<header>
+  📱 ArteEducar
+</header>
 
-  <!-- Botão de download principal com estilo verde -->
-  <a href="LINK_DO_APK" download class="download-btn">
-    📥 Baixar App ArteEducar
-  </a>
+<div class="container">
+  <div class="app-card">
 
-  <!-- Script para verificar se é Android -->
-  <script>
-    if (!/Android/i.test(navigator.userAgent)) {
-      document.write('<p class="aviso-android">⚠️ Baixe este app apenas em dispositivos Android.</p>');
-    }
-  </script>
+    <!-- ÍCONE (troque se quiser) -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="app-icon">
 
-  <div class="app">
-    <h2>🎨 Jogo Noite Estrelada</h2>
-    <p>Aprenda arte brincando</p>
-    <a href="LINK_DO_APK" download>📥 Baixar App ArteEducar</a>
+    <div class="app-name">ArteEducar</div>
+
+    <div class="app-desc">
+      Jogos, arte, criatividade e aprendizagem em um só lugar 🎨✨
+    </div>
+
+    <!-- BOTÃO DOWNLOAD -->
+    <a href="LINK_DO_APK" class="btn-download">
+      📥 Baixar APK
+    </a>
+
+    <div class="warning">
+      ⚠️ Disponível apenas para Android
+    </div>
+
   </div>
+</div>
 
-  <div class="app">
-    <h2>🧠 Desenho Criativo</h2>
-    <p>Atividades para crianças</p>
-    <a href="LINK_DO_APK" download>📥 Baixar App ArteEducar</a>
-  </div>
+<script>
+  // Aviso automático se não for Android
+  if (!/Android/i.test(navigator.userAgent)) {
+    alert("Este aplicativo é apenas para dispositivos Android 📱");
+  }
+</script>
 
 </body>
 </html>
