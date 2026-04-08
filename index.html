@@ -11,19 +11,17 @@
       font-family: Arial, sans-serif;
       color: white;
 
-      /* FUNDO */
-      background: url('https://github.com/lenilsonxavier-dev/arteeducar-loja/blob/main/public/jogs.jpg?raw=true') no-repeat center center fixed;
+      /* FUNDO LOCAL (CORRIGIDO) */
+      background: url('public/jogs.jpg') no-repeat center center fixed;
       background-size: cover;
     }
 
-    /* camada escura para dar contraste */
     .overlay {
       background: rgba(0,0,0,0.6);
       min-height: 100vh;
       padding: 20px;
     }
 
-    /* topo estilo Play Store */
     .header {
       display: flex;
       align-items: center;
@@ -45,7 +43,6 @@
       color: #ccc;
     }
 
-    /* botão instalar */
     .btn-instalar {
       margin-top: 15px;
       padding: 12px 25px;
@@ -61,7 +58,6 @@
       background: #16a34a;
     }
 
-    /* seção */
     .secao {
       margin-top: 30px;
     }
@@ -79,7 +75,7 @@
 
   <!-- TOPO -->
   <div class="header">
-    <img class="icon" src="https://github.com/lenilsonxavier-dev/arteeducar-loja/blob/main/public/icon-192.png?raw=true">
+    <img class="icon" src="public/icon-192.png">
     
     <div>
       <div class="titulo">ArteEducar</div>
@@ -117,9 +113,7 @@
 
 <script>
   function baixarAPK() {
-    // 🔗 COLOQUE AQUI O LINK DO SEU APK
     const link = "https://seu-link-do-apk.apk";
-
     window.location.href = link;
   }
 </script>
