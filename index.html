@@ -49,6 +49,12 @@
       padding: 5px;
     }
 
+    .botoes-container {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
     .btn-instalar {
       padding: 12px 25px;
       font-size: 16px;
@@ -223,6 +229,16 @@
       .icon {
         width: 60px;
       }
+
+      .botoes-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-instalar {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -230,17 +246,21 @@
 
 <div class="content">
 
-  <!-- TOPO COM ÍCONE E BOTÃO -->
+  <!-- TOPO COM ÍCONE E BOTÕES -->
   <div class="header">
     <div class="header-left">
       <img class="icon" id="iconApp" src="https://i.imgur.com/pdbLEaE.png" alt="Ícone do App ArteEducar">
     </div>
 
-    <a href="https://github.com/lenilsonxavier-dev/arteeducar-loja/releases/download/v1/app-release.apk" download>
-      <button class="btn-instalar">
+    <div class="botoes-container">
+      <button class="btn-instalar" onclick="window.location.href='https://github.com/lenilsonxavier-dev/arteeducar-loja/releases/download/v1/pequenosartistas.apk'">
         📲 Baixar App
       </button>
-    </a>
+
+      <a href="https://arteeducar.vercel.app/" class="paleta-btn">
+        🎨 Versão Web
+      </a>
+    </div>
   </div>
 
   <!-- ERRO -->
@@ -299,6 +319,25 @@
     </div>
   </div>
 </div>
+
+<style>
+.paleta-btn {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 50% 40% 50% 40%;
+  background: radial-gradient(circle at 30% 30%, #ffcc00, #ff6600, #ff0066);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.paleta-btn:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+</style>
 
 <script>
   // Controle das abas
