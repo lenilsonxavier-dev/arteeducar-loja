@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ArteEducar Apps</title>
   <style>
     body {
@@ -31,22 +31,54 @@
       text-decoration: none;
       border-radius: 8px;
     }
+    /* Estilo especial para o botão de download principal */
+    .download-btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #22c55e;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      margin: 20px auto;
+      font-size: 18px;
+    }
+    .aviso-android {
+      background: #fff3cd;
+      color: #856404;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px auto;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
 
   <h1>📚 ArteEducar Apps</h1>
 
+  <!-- Botão de download principal com estilo verde -->
+  <a href="LINK_DO_APK" download class="download-btn">
+    📥 Baixar App ArteEducar
+  </a>
+
+  <!-- Script para verificar se é Android -->
+  <script>
+    if (!/Android/i.test(navigator.userAgent)) {
+      document.write('<p class="aviso-android">⚠️ Baixe este app apenas em dispositivos Android.</p>');
+    }
+  </script>
+
   <div class="app">
     <h2>🎨 Jogo Noite Estrelada</h2>
     <p>Aprenda arte brincando</p>
-    <a href="LINK-DO-APK-AQUI">📥 Baixar</a>
+    <a href="LINK_DO_APK" download>📥 Baixar App ArteEducar</a>
   </div>
 
   <div class="app">
     <h2>🧠 Desenho Criativo</h2>
     <p>Atividades para crianças</p>
-    <a href="LINK-DO-APK-AQUI">📥 Baixar</a>
+    <a href="LINK_DO_APK" download>📥 Baixar App ArteEducar</a>
   </div>
 
 </body>
