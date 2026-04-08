@@ -6,24 +6,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       color: white;
-      background: url('jogs.jpg') no-repeat center center fixed;
+      background: url('https://i.imgur.com/erjdcxu.jpeg') no-repeat center center fixed;
       background-size: cover;
     }
 
     .overlay {
       background: linear-gradient(
-        rgba(0,0,0,0.7),
-        rgba(0,0,0,0.9)
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.7)
       );
       min-height: 100vh;
       padding: 20px;
+      position: relative;
     }
 
     .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 0;
+    }
+
+    .header-left {
       display: flex;
       align-items: center;
       gap: 15px;
@@ -34,18 +49,7 @@
       border-radius: 20px;
     }
 
-    .titulo {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .sub {
-      font-size: 14px;
-      color: #ccc;
-    }
-
     .btn-instalar {
-      margin-top: 15px;
       padding: 12px 25px;
       font-size: 16px;
       border: none;
@@ -53,20 +57,124 @@
       background: #22c55e;
       color: white;
       cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
     }
 
     .btn-instalar:hover {
       background: #16a34a;
+      transform: scale(1.05);
     }
 
-    .secao {
-      margin-top: 30px;
+    .btn-instalar:active {
+      transform: scale(0.95);
     }
 
-    .card {
-      background: rgba(255,255,255,0.1);
-      padding: 15px;
+    /* Área das abas no canto inferior esquerdo */
+    .abas-container {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .abas-botoes {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .aba-btn {
+      padding: 12px 20px;
+      background: rgba(34, 197, 94, 0.9);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s;
+      backdrop-filter: blur(5px);
+    }
+
+    .aba-btn:hover {
+      background: rgba(22, 163, 74, 1);
+      transform: translateY(-2px);
+    }
+
+    .aba-btn.ativo {
+      background: #16a34a;
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+    }
+
+    .aba-conteudo {
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
       border-radius: 15px;
+      padding: 15px;
+      max-width: 350px;
+      width: 90vw;
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s;
+    }
+
+    .aba-item {
+      display: none;
+      animation: fadeIn 0.3s;
+    }
+
+    .aba-item.ativo {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .aba-conteudo h3 {
+      color: #22c55e;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .aba-conteudo p {
+      margin-bottom: 12px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .aba-conteudo ul {
+      margin-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .aba-conteudo li {
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .fechar-aba {
+      background: rgba(255, 69, 58, 0.8);
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+
+    .fechar-aba:hover {
+      background: rgba(255, 69, 58, 1);
     }
 
     .erro {
@@ -75,6 +183,41 @@
       background: #ef4444;
       border-radius: 10px;
       display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1001;
+      max-width: 300px;
+    }
+
+    /* Scroll personalizado */
+    .aba-conteudo::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .aba-conteudo::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .aba-conteudo::-webkit-scrollbar-thumb {
+      background: #22c55e;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .aba-btn {
+        padding: 8px 15px;
+        font-size: 12px;
+      }
+      
+      .aba-conteudo {
+        max-width: 300px;
+      }
+      
+      .icon {
+        width: 60px;
+      }
     }
   </style>
 </head>
@@ -82,78 +225,157 @@
 
 <div class="overlay">
 
-  <!-- TOPO -->
+  <!-- TOPO COM ÍCONE E BOTÃO -->
   <div class="header">
-    <img class="icon" id="iconApp" src="icon-192.png">
-    
-    <div>
-      <div class="titulo">ArteEducar</div>
-      <div class="sub">Educação & Jogos</div>
+    <div class="header-left">
+      <img class="icon" id="iconApp" src="https://i.imgur.com/pdbLEaE.png" alt="Ícone do App ArteEducar">
     </div>
-  </div>
 
-  <!-- BOTÃO -->
-  <button class="btn-instalar" onclick="baixarAPK()">
-    📥 Instalar
-  </button>
+    <a href="https://github.com/lenilsonxavier-dev/arteeducar-loja/releases/download/v1/app-release.apk" download>
+      <button class="btn-instalar">
+        📲 Baixar App
+      </button>
+    </a>
+  </div>
 
   <!-- ERRO -->
   <div class="erro" id="erroBox"></div>
 
-  <!-- DESCRIÇÃO -->
-  <div class="secao">
-    <div class="card">
-      <h3>📚 Sobre este app</h3>
-      <p>
-        Plataforma educativa com jogos, desenho, atividades criativas
-        e recursos interativos para crianças.
-      </p>
+</div>
+
+<!-- ABAS OCULTAS NO CANTO INFERIOR ESQUERDO -->
+<div class="abas-container">
+  <div class="abas-botoes">
+    <button class="aba-btn" data-aba="sobre">📖 Sobre</button>
+    <button class="aba-btn" data-aba="recursos">🎯 Recursos</button>
+    <button class="aba-btn" data-aba="contato">📧 Contato</button>
+  </div>
+  
+  <div class="aba-conteudo">
+    <!-- Aba Sobre -->
+    <div class="aba-item" id="aba-sobre">
+      <h3>📖 Sobre o ArteEducar</h3>
+      <p>O ArteEducar é uma plataforma educativa inovadora desenvolvida para tornar o aprendizado mais divertido e interativo para crianças de todas as idades.</p>
+      <p><strong>🎯 Missão:</strong> Proporcionar educação de qualidade através de jogos e atividades criativas.</p>
+      <p><strong>👨‍🏫 Desenvolvedor:</strong> Professor Leno, com mais de 10 anos de experiência em educação infantil.</p>
+      <p><strong>📅 Lançamento:</strong> 2024</p>
+      <p><strong>🎨 Diferenciais:</strong> Interface colorida e amigável, conteúdo adaptado para cada faixa etária, acompanhamento de progresso.</p>
+      <button class="fechar-aba" onclick="fecharAbas()">Fechar</button>
+    </div>
+
+    <!-- Aba Recursos -->
+    <div class="aba-item" id="aba-recursos">
+      <h3>🎯 Recursos do App</h3>
+      <ul>
+        <li>✅ Jogos educativos interativos</li>
+        <li>✅ Atividades de desenho e pintura</li>
+        <li>✅ Exercícios de matemática e português</li>
+        <li>✅ Histórias animadas</li>
+        <li>✅ Sistema de recompensas e conquistas</li>
+        <li>✅ Modo offline disponível</li>
+        <li>✅ Interface amigável para crianças</li>
+        <li>✅ Atualizações regulares com novo conteúdo</li>
+        <li>✅ Mais de 100 atividades diferentes</li>
+        <li>✅ Sem anúncios irritantes</li>
+      </ul>
+      <button class="fechar-aba" onclick="fecharAbas()">Fechar</button>
+    </div>
+
+    <!-- Aba Contato -->
+    <div class="aba-item" id="aba-contato">
+      <h3>📧 Contato e Suporte</h3>
+      <p><strong>📱 Desenvolvedor:</strong> Professor Leno</p>
+      <p><strong>📧 E-mail:</strong> lenilsonxavier@gmail.com</p>
+      <p><strong>💬 Suporte:</strong> Disponível de segunda a sexta, 9h às 18h</p>
+      <p><strong>🐛 Reportar bug:</strong> Envie um e-mail com descrição do problema</p>
+      <p><strong>💡 Sugestões:</strong> Adoramos receber ideias para melhorar o app!</p>
+      <p><strong>🌐 GitHub:</strong> github.com/lenilsonxavier-dev</p>
+      <button class="fechar-aba" onclick="fecharAbas()">Fechar</button>
     </div>
   </div>
-
-  <!-- DETALHES -->
-  <div class="secao">
-    <div class="card">
-      <h3>ℹ️ Informações</h3>
-      <p>Versão: 1.0</p>
-      <p>Tamanho: ~10MB</p>
-      <p>Desenvolvedor: Professor Leno</p>
-    </div>
-  </div>
-
 </div>
 
 <script>
+  // Controle das abas
+  const abaBtns = document.querySelectorAll('.aba-btn');
+  const abaItems = document.querySelectorAll('.aba-item');
+  const abasContainer = document.querySelector('.abas-container');
+
+  // Função para abrir uma aba específica
+  function abrirAba(abaId) {
+    // Esconder todos os conteúdos
+    abaItems.forEach(item => {
+      item.classList.remove('ativo');
+    });
+    
+    // Remover classe ativa de todos os botões
+    abaBtns.forEach(btn => {
+      btn.classList.remove('ativo');
+    });
+    
+    // Mostrar o conteúdo selecionado
+    const abaSelecionada = document.getElementById(`aba-${abaId}`);
+    if (abaSelecionada) {
+      abaSelecionada.classList.add('ativo');
+    }
+    
+    // Adicionar classe ativa ao botão clicado
+    const btnClicado = document.querySelector(`[data-aba="${abaId}"]`);
+    if (btnClicado) {
+      btnClicado.classList.add('ativo');
+    }
+    
+    // Garantir que o container esteja visível
+    abasContainer.style.display = 'block';
+  }
+
+  // Função para fechar as abas
+  function fecharAbas() {
+    abaItems.forEach(item => {
+      item.classList.remove('ativo');
+    });
+    abaBtns.forEach(btn => {
+      btn.classList.remove('ativo');
+    });
+  }
+
+  // Adicionar eventos aos botões
+  abaBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const abaId = btn.getAttribute('data-aba');
+      abrirAba(abaId);
+    });
+  });
+
+  // Inicialmente, todas as abas ficam ocultas
+  fecharAbas();
+
   // 🔍 VERIFICAR IMAGENS
   function verificarImagens() {
     const erroBox = document.getElementById("erroBox");
 
+    // Verificar imagem de fundo
     const imgFundo = new Image();
-    imgFundo.src = "jogs.jpg";
+    imgFundo.src = "https://i.imgur.com/erjdcxu.jpeg";
 
     imgFundo.onerror = () => {
       erroBox.style.display = "block";
-      erroBox.innerText = "❌ Erro: imagem de fundo (jogs.jpg) não encontrada.";
+      erroBox.innerText = "❌ Erro: Imagem de fundo não pode ser carregada.";
+      setTimeout(() => {
+        erroBox.style.display = "none";
+      }, 5000);
     };
 
+    // Verificar ícone
     const icon = document.getElementById("iconApp");
 
     icon.onerror = () => {
       erroBox.style.display = "block";
-      erroBox.innerText += "\n❌ Erro: ícone (icon-192.png) não encontrado.";
+      erroBox.innerText = "❌ Erro: Ícone do app não encontrado.";
+      setTimeout(() => {
+        erroBox.style.display = "none";
+      }, 5000);
     };
-  }
-
-  // 📥 DOWNLOAD APK
-  function baixarAPK() {
-    const link = "https://seu-link-do-apk.apk";
-
-    if (link.includes("seu-link")) {
-      alert("⚠️ Você ainda não colocou o link do APK.");
-      return;
-    }
-
-    window.location.href = link;
   }
 
   // 🚀 EXECUTA AO CARREGAR
