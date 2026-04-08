@@ -10,14 +10,15 @@
       margin: 0;
       font-family: Arial, sans-serif;
       color: white;
-
-      /* FUNDO LOCAL (CORRIGIDO) */
-      background: url('public/jogs.jpg') no-repeat center center fixed;
+      background: url('jogs.jpg') no-repeat center center fixed;
       background-size: cover;
     }
 
     .overlay {
-      background: rgba(0,0,0,0.6);
+      background: linear-gradient(
+        rgba(0,0,0,0.7),
+        rgba(0,0,0,0.9)
+      );
       min-height: 100vh;
       padding: 20px;
     }
@@ -67,6 +68,14 @@
       padding: 15px;
       border-radius: 15px;
     }
+
+    .erro {
+      margin-top: 20px;
+      padding: 10px;
+      background: #ef4444;
+      border-radius: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -75,7 +84,7 @@
 
   <!-- TOPO -->
   <div class="header">
-    <img class="icon" src="public/icon-192.png">
+    <img class="icon" id="iconApp" src="icon-192.png">
     
     <div>
       <div class="titulo">ArteEducar</div>
@@ -87,6 +96,9 @@
   <button class="btn-instalar" onclick="baixarAPK()">
     📥 Instalar
   </button>
+
+  <!-- ERRO -->
+  <div class="erro" id="erroBox"></div>
 
   <!-- DESCRIÇÃO -->
   <div class="secao">
@@ -112,10 +124,40 @@
 </div>
 
 <script>
+  // 🔍 VERIFICAR IMAGENS
+  function verificarImagens() {
+    const erroBox = document.getElementById("erroBox");
+
+    const imgFundo = new Image();
+    imgFundo.src = "jogs.jpg";
+
+    imgFundo.onerror = () => {
+      erroBox.style.display = "block";
+      erroBox.innerText = "❌ Erro: imagem de fundo (jogs.jpg) não encontrada.";
+    };
+
+    const icon = document.getElementById("iconApp");
+
+    icon.onerror = () => {
+      erroBox.style.display = "block";
+      erroBox.innerText += "\n❌ Erro: ícone (icon-192.png) não encontrado.";
+    };
+  }
+
+  // 📥 DOWNLOAD APK
   function baixarAPK() {
     const link = "https://seu-link-do-apk.apk";
+
+    if (link.includes("seu-link")) {
+      alert("⚠️ Você ainda não colocou o link do APK.");
+      return;
+    }
+
     window.location.href = link;
   }
+
+  // 🚀 EXECUTA AO CARREGAR
+  window.onload = verificarImagens;
 </script>
 
 </body>
