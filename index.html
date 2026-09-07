@@ -20,7 +20,6 @@
             min-height: 100vh;
         }
 
-        /* SEM overlay - imagem 100% original */
         .content {
             min-height: 100vh;
             padding: 20px;
@@ -82,7 +81,7 @@
             transform: scale(0.95);
         }
 
-        /* Área das abas no canto inferior esquerdo */
+        /* Área das abas */
         .abas-container {
             position: fixed;
             bottom: 20px;
@@ -206,7 +205,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Scroll personalizado */
         .aba-conteudo::-webkit-scrollbar {
             width: 8px;
         }
@@ -240,7 +238,7 @@
             transform: scale(1.1) rotate(-2deg);
         }
 
-        /* Botão de download do livro */
+        /* Botão de download dos livros */
         .btn-download-livro {
             display: inline-block;
             padding: 10px 20px;
@@ -260,6 +258,11 @@
         .btn-download-livro:hover {
             background: #16a34a;
             transform: scale(1.03);
+        }
+
+        .livro-divider {
+            border-top: 2px dashed #ddd;
+            margin: 15px 0;
         }
 
         @media (max-width: 768px) {
@@ -349,22 +352,36 @@
                 <button class="fechar-aba" onclick="fecharAbas()">Fechar</button>
             </div>
 
-            <!-- Aba Livros (com botão de download) -->
+            <!-- Aba Livros (com dois livros) -->
             <div class="aba-item" id="aba-livros">
-                <h3>📚 Bruxa Neura</h3>
-                <p><em>Uma história encantadora sobre emoções, amizade e o poder da brincadeira.</em></p>
-                <p><strong>📖 Sinopse:</strong> A bruxinha Neura cria uma poção com cheiro de mofo que espalha tristeza, raiva, ansiedade, nojo e medo. As crianças Julinho, Vivi, Alex e Isa ficam tristes e assustadas. Mas, ao se unirem, descobrem que a amizade e a brincadeira são o antídoto perfeito. Até a própria Neura aprende que o <em>Atichinchim</em> perde a força quando há sorrisos e afeto.</p>
-                <p><strong>👨‍🏫 Autor:</strong> Professor Leno</p>
-                <p><strong>🎯 Temas:</strong> Inteligência emocional, Amizade, Superação, Arte</p>
-                <p><strong>📅 Ano:</strong> 2026</p>
-                <p style="font-style: italic; color: #555; border-left: 3px solid #22c55e; padding-left: 10px;">"Criança que ri aqui e ali… Bom é futebol até o pôr-do-sol! Quanto pisão no pé, escorregão e chute na canela!"</p>
+                <h3>📚 Nossos Livros</h3>
 
-                <!-- Botão de download do PDF -->
-                <a href="BRUXANEURA.pdf" download="Bruxa_Neura_Professor_Leno.pdf" class="btn-download-livro">
-                    📥 Baixar o livro (PDF)
-                </a>
+                <!-- Livro 1: Bruxa Neura -->
+                <div style="margin-bottom: 15px;">
+                    <p><strong>🧙‍♀️ Bruxa Neura</strong><br>
+                    <em>Uma história encantadora sobre emoções, amizade e o poder da brincadeira.</em></p>
+                    <p><strong>📖 Sinopse:</strong> A bruxinha Neura cria uma poção com cheiro de mofo que espalha tristeza, raiva, ansiedade, nojo e medo. As crianças Julinho, Vivi, Alex e Isa ficam tristes e assustadas. Mas, ao se unirem, descobrem que a amizade e a brincadeira são o antídoto perfeito. Até a própria Neura aprende que o <em>Atichinchim</em> perde a força quando há sorrisos e afeto.</p>
+                    <p><strong>👨‍🏫 Autor:</strong> Professor Leno</p>
+                    <a href="BRUXANEURA.pdf" download="Bruxa_Neura_Professor_Leno.pdf" class="btn-download-livro">
+                        📥 Baixar (PDF)
+                    </a>
+                </div>
 
-                <button class="fechar-aba" onclick="fecharAbas()">Fechar</button>
+                <div class="livro-divider"></div>
+
+                <!-- Livro 2: IA para Crianças -->
+                <div>
+                    <p><strong>🤖 10 Conceitos Fundamentais da IA para Crianças</strong><br>
+                    <em>Guia lúdico para entender inteligência artificial na educação básica.</em></p>
+                    <p><strong>📖 Sinopse:</strong> Este material apresenta, de forma simples e visual, os principais conceitos de IA – como dados, treinamento, algoritmos, padrões, vieses, privacidade, IA generativa, ética e prompts. Com exemplos do dia a dia e sugestões de atividades para a escola, o livro incentiva o pensamento crítico e o uso responsável da tecnologia.</p>
+                    <p><strong>👨‍🏫 Autor:</strong> Prof. Lenilson Xavier (com apoio do ChatGPT)</p>
+                    <p><strong>🎯 Público:</strong> Crianças a partir de 10 anos e educadores</p>
+                    <a href="iaparacrianças.pdf" download="10_Conceitos_IA_para_Criancas.pdf" class="btn-download-livro">
+                        📥 Baixar (PDF)
+                    </a>
+                </div>
+
+                <button class="fechar-aba" onclick="fecharAbas()" style="margin-top: 15px;">Fechar</button>
             </div>
         </div>
     </div>
@@ -375,45 +392,24 @@
         const abaItems = document.querySelectorAll('.aba-item');
         const abasContainer = document.querySelector('.abas-container');
 
-        // Função para abrir uma aba específica
         function abrirAba(abaId) {
-            // Esconder todos os conteúdos
-            abaItems.forEach(item => {
-                item.classList.remove('ativo');
-            });
+            abaItems.forEach(item => item.classList.remove('ativo'));
+            abaBtns.forEach(btn => btn.classList.remove('ativo'));
 
-            // Remover classe ativa de todos os botões
-            abaBtns.forEach(btn => {
-                btn.classList.remove('ativo');
-            });
-
-            // Mostrar o conteúdo selecionado
             const abaSelecionada = document.getElementById(`aba-${abaId}`);
-            if (abaSelecionada) {
-                abaSelecionada.classList.add('ativo');
-            }
+            if (abaSelecionada) abaSelecionada.classList.add('ativo');
 
-            // Adicionar classe ativa ao botão clicado
             const btnClicado = document.querySelector(`[data-aba="${abaId}"]`);
-            if (btnClicado) {
-                btnClicado.classList.add('ativo');
-            }
+            if (btnClicado) btnClicado.classList.add('ativo');
 
-            // Garantir que o container esteja visível
             abasContainer.style.display = 'block';
         }
 
-        // Função para fechar as abas
         function fecharAbas() {
-            abaItems.forEach(item => {
-                item.classList.remove('ativo');
-            });
-            abaBtns.forEach(btn => {
-                btn.classList.remove('ativo');
-            });
+            abaItems.forEach(item => item.classList.remove('ativo'));
+            abaBtns.forEach(btn => btn.classList.remove('ativo'));
         }
 
-        // Adicionar eventos aos botões
         abaBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const abaId = btn.getAttribute('data-aba');
@@ -421,38 +417,26 @@
             });
         });
 
-        // Inicialmente, todas as abas ficam ocultas
         fecharAbas();
 
-        // 🔍 VERIFICAR IMAGENS
         function verificarImagens() {
             const erroBox = document.getElementById("erroBox");
-
-            // Verificar imagem de fundo
             const imgFundo = new Image();
             imgFundo.src = "https://i.imgur.com/erjdcxu.jpeg";
-
             imgFundo.onerror = () => {
                 erroBox.style.display = "block";
                 erroBox.innerText = "❌ Erro: Imagem de fundo não pode ser carregada.";
-                setTimeout(() => {
-                    erroBox.style.display = "none";
-                }, 5000);
+                setTimeout(() => { erroBox.style.display = "none"; }, 5000);
             };
 
-            // Verificar ícone
             const icon = document.getElementById("iconApp");
-
             icon.onerror = () => {
                 erroBox.style.display = "block";
                 erroBox.innerText = "❌ Erro: Ícone do app não encontrado.";
-                setTimeout(() => {
-                    erroBox.style.display = "none";
-                }, 5000);
+                setTimeout(() => { erroBox.style.display = "none"; }, 5000);
             };
         }
 
-        // 🚀 EXECUTA AO CARREGAR
         window.onload = verificarImagens;
     </script>
 
