@@ -349,7 +349,7 @@
                 <button class="fechar-aba" onclick="fecharAbas()">Fechar</button>
             </div>
 
-            <!-- Aba Livros (com dois livros) -->
+            <!-- Aba Livros (três livros) -->
             <div class="aba-item" id="aba-livros">
                 <h3>📚 Nossos Livros</h3>
 
@@ -357,10 +357,12 @@
                 <div style="margin-bottom: 15px;">
                     <p><strong>🧙‍♀️ Bruxa Neura</strong><br>
                     <em>Uma história encantadora sobre emoções, amizade e o poder da brincadeira.</em></p>
-                    <p><strong>📖 Sinopse:</strong> A bruxinha Neura cria uma poção com cheiro de mofo que espalha tristeza, raiva, ansiedade, nojo e medo. As crianças Julinho, Vivi, Alex e Isa ficam tristes e assustadas. Mas, ao se unirem, descobrem que a amizade e a brincadeira são o antídoto perfeito. Até a própria Neura aprende que o <em>Atichinchim</em> perde a força quando há sorrisos e afeto.</p>
+                    <p><strong>📖 Sinopse:</strong> A bruxinha Neura cria uma poção com cheiro de mofo que espalha tristeza, raiva, ansiedade, nojo e medo. As crianças Julinho, Vivi, Alex e Isa ficam tristes e assustadas. Mas, ao se unirem, descobrem que a amizade e a brincadeira são o antídoto perfeito.</p>
                     <p><strong>👨‍🏫 Autor:</strong> Professor Leno</p>
-                    <!-- CORREÇÃO: href aponta para BRUXANEURA.pdf (nome correto) -->
-                    <a href="BRUXANEURA.pdf" download="Bruxa_Neura_Professor_Leno.pdf" class="btn-download-livro" id="downloadBruxa">
+                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/BRUXANEURA.pdf" 
+                       download="Bruxa_Neura_Professor_Leno.pdf" 
+                       class="btn-download-livro" 
+                       id="downloadBruxa">
                         📥 Baixar (PDF)
                     </a>
                 </div>
@@ -368,14 +370,31 @@
                 <div class="livro-divider"></div>
 
                 <!-- Livro 2: IA para Crianças -->
-                <div>
+                <div style="margin-bottom: 15px;">
                     <p><strong>🤖 10 Conceitos Fundamentais da IA para Crianças</strong><br>
                     <em>Guia lúdico para entender inteligência artificial na educação básica.</em></p>
-                    <p><strong>📖 Sinopse:</strong> Este material apresenta, de forma simples e visual, os principais conceitos de IA – como dados, treinamento, algoritmos, padrões, vieses, privacidade, IA generativa, ética e prompts. Com exemplos do dia a dia e sugestões de atividades para a escola, o livro incentiva o pensamento crítico e o uso responsável da tecnologia.</p>
+                    <p><strong>📖 Sinopse:</strong> Este material apresenta, de forma simples e visual, os principais conceitos de IA – como dados, treinamento, algoritmos, padrões, vieses, privacidade, IA generativa, ética e prompts.</p>
                     <p><strong>👨‍🏫 Autor:</strong> Prof. Lenilson Xavier (com apoio do ChatGPT)</p>
-                    <p><strong>🎯 Público:</strong> Crianças a partir de 10 anos e educadores</p>
-                    <!-- CORREÇÃO: href agora aponta para aiaparacrianças.pdf (nome real do arquivo) -->
-                    <a href="aiaparacrianças.pdf" download="10_Conceitos_IA_para_Criancas.pdf" class="btn-download-livro" id="downloadIA">
+                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/aiaparacrian%C3%A7as.pdf" 
+                       download="10_Conceitos_IA_para_Criancas.pdf" 
+                       class="btn-download-livro" 
+                       id="downloadIA">
+                        📥 Baixar (PDF)
+                    </a>
+                </div>
+
+                <div class="livro-divider"></div>
+
+                <!-- Livro 3: Bruxinha Neura (novo) -->
+                <div>
+                    <p><strong>🧹 Bruxinha Neura</strong><br>
+                    <em>Uma versão especial com atividades e reflexões sobre as emoções.</em></p>
+                    <p><strong>📖 Sinopse:</strong> Este material complementar traz exercícios lúdicos para ajudar as crianças a identificarem e lidarem com sentimentos como tristeza, medo, raiva e ansiedade. Perfeito para usar em sala de aula ou em casa com a família.</p>
+                    <p><strong>👨‍🏫 Autor:</strong> Professor Leno</p>
+                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/BRUXINHANEURA.pdf" 
+                       download="Bruxinha_Neura_Atividades.pdf" 
+                       class="btn-download-livro" 
+                       id="downloadBruxinha">
                         📥 Baixar (PDF)
                     </a>
                 </div>
@@ -419,27 +438,22 @@
         fecharAbas();
 
         // =====================================================
-        //  FALLBACK INTELIGENTE PARA DOWNLOAD DOS PDFs
-        //  Se o download direto falhar (arquivo não encontrado),
-        //  o PDF é aberto em uma nova aba para visualização/impressão.
+        //  FALLBACK PARA DOWNLOAD DOS PDFs (com fetch)
+        //  Se falhar, abre em nova aba.
         // =====================================================
-        function setupDownloadFallback(linkId, filePath) {
+        function setupDownloadFallback(linkId, fileUrl) {
             const link = document.getElementById(linkId);
             if (!link) return;
 
             link.addEventListener('click', function(e) {
-                e.preventDefault(); // interrompe o comportamento padrão
+                e.preventDefault();
 
-                // Tenta baixar via fetch
-                fetch(filePath)
+                fetch(fileUrl)
                     .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Arquivo não encontrado');
-                        }
+                        if (!response.ok) throw new Error('Arquivo não encontrado');
                         return response.blob();
                     })
                     .then(blob => {
-                        // Cria um link temporário para download forçado
                         const url = window.URL.createObjectURL(blob);
                         const a = document.createElement('a');
                         a.href = url;
@@ -450,18 +464,18 @@
                         window.URL.revokeObjectURL(url);
                     })
                     .catch(() => {
-                        // Fallback: abre em nova aba (útil para visualizar ou imprimir)
-                        window.open(filePath, '_blank');
+                        window.open(fileUrl, '_blank');
                     });
             });
         }
 
-        // Configurar fallback para ambos os livros
-        setupDownloadFallback('downloadBruxa', 'BRUXANEURA.pdf');
-        setupDownloadFallback('downloadIA', 'aiaparacrianças.pdf');
+        // Configurar fallback para os três livros
+        setupDownloadFallback('downloadBruxa', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/BRUXANEURA.pdf');
+        setupDownloadFallback('downloadIA', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/aiaparacrian%C3%A7as.pdf');
+        setupDownloadFallback('downloadBruxinha', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/BRUXINHANEURA.pdf');
 
         // =====================================================
-        //  VERIFICAÇÃO DE IMAGENS (fundo e ícone)
+        //  VERIFICAÇÃO DE IMAGENS
         // =====================================================
         function verificarImagens() {
             const erroBox = document.getElementById("erroBox");
