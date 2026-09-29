@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -20,11 +16,7 @@
             min-height: 100vh;
         }
 
-        .content {
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-        }
+        .content { min-height: 100vh; padding: 20px; position: relative; }
 
         .header {
             display: flex;
@@ -34,16 +26,12 @@
             margin-bottom: 0;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .header-left { display: flex; align-items: center; gap: 15px; }
 
         .icon {
             width: 80px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             background: white;
             padding: 5px;
         }
@@ -64,22 +52,15 @@
             color: white;
             cursor: pointer;
             transition: transform 0.2s, background 0.2s;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             font-weight: bold;
             text-decoration: none;
             display: inline-block;
             text-align: center;
             min-width: 150px;
         }
-
-        .btn-instalar:hover {
-            background: #16a34a;
-            transform: scale(1.05);
-        }
-
-        .btn-instalar:active {
-            transform: scale(0.95);
-        }
+        .btn-instalar:hover { background: #16a34a; transform: scale(1.05); }
+        .btn-instalar:active { transform: scale(0.95); }
 
         .abas-container {
             position: fixed;
@@ -88,11 +69,7 @@
             z-index: 1000;
         }
 
-        .abas-botoes {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
+        .abas-botoes { display: flex; gap: 10px; margin-bottom: 10px; }
 
         .aba-btn {
             padding: 12px 20px;
@@ -104,18 +81,10 @@
             font-size: 14px;
             font-weight: bold;
             transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-
-        .aba-btn:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-        }
-
-        .aba-btn.ativo {
-            background: #16a34a;
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
-        }
+        .aba-btn:hover { background: #16a34a; transform: translateY(-2px); }
+        .aba-btn.ativo { background: #16a34a; box-shadow: 0 0 15px rgba(34,197,94,0.5); }
 
         .aba-conteudo {
             background: white;
@@ -127,51 +96,22 @@
             overflow-y: auto;
             border: 1px solid #ddd;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             color: #333;
         }
 
-        .aba-item {
-            display: none;
-            animation: fadeIn 0.3s;
-        }
-
-        .aba-item.ativo {
-            display: block;
-        }
+        .aba-item { display: none; animation: fadeIn 0.3s; }
+        .aba-item.ativo { display: block; }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .aba-conteudo h3 {
-            color: #22c55e;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .aba-conteudo p {
-            margin-bottom: 12px;
-            line-height: 1.5;
-            font-size: 14px;
-        }
-
-        .aba-conteudo ul {
-            margin-left: 20px;
-            margin-bottom: 12px;
-        }
-
-        .aba-conteudo li {
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
+        .aba-conteudo h3 { color: #22c55e; margin-bottom: 10px; font-size: 18px; }
+        .aba-conteudo p { margin-bottom: 12px; line-height: 1.5; font-size: 14px; }
+        .aba-conteudo ul { margin-left: 20px; margin-bottom: 12px; }
+        .aba-conteudo li { margin-bottom: 8px; line-height: 1.4; }
 
         .fechar-aba {
             background: #ef4444;
@@ -184,10 +124,7 @@
             margin-top: 10px;
             transition: background 0.2s;
         }
-
-        .fechar-aba:hover {
-            background: #dc2626;
-        }
+        .fechar-aba:hover { background: #dc2626; }
 
         .erro {
             margin-top: 20px;
@@ -201,22 +138,12 @@
             right: 20px;
             z-index: 1001;
             max-width: 300px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        .aba-conteudo::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .aba-conteudo::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .aba-conteudo::-webkit-scrollbar-thumb {
-            background: #22c55e;
-            border-radius: 10px;
-        }
+        .aba-conteudo::-webkit-scrollbar { width: 8px; }
+        .aba-conteudo::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        .aba-conteudo::-webkit-scrollbar-thumb { background: #22c55e; border-radius: 10px; }
 
         .paleta-btn {
             display: inline-block;
@@ -227,15 +154,12 @@
             text-decoration: none;
             border-radius: 50% 40% 50% 40%;
             background: radial-gradient(circle at 30% 30%, #ffcc00, #ff6600, #ff0066);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
             transition: 0.3s;
             text-align: center;
             min-width: 150px;
         }
-
-        .paleta-btn:hover {
-            transform: scale(1.1) rotate(-2deg);
-        }
+        .paleta-btn:hover { transform: scale(1.1) rotate(-2deg); }
 
         .btn-download-livro {
             display: inline-block;
@@ -246,75 +170,41 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             transition: all 0.2s;
             margin: 8px 0 5px 0;
             border: none;
             cursor: pointer;
         }
+        .btn-download-livro:hover { background: #16a34a; transform: scale(1.03); }
 
-        .btn-download-livro:hover {
-            background: #16a34a;
-            transform: scale(1.03);
-        }
-
-        .livro-divider {
-            border-top: 2px dashed #ddd;
-            margin: 15px 0;
-        }
+        .livro-divider { border-top: 2px dashed #ddd; margin: 15px 0; }
 
         @media (max-width: 768px) {
-            .aba-btn {
-                padding: 8px 15px;
-                font-size: 12px;
-            }
-
-            .aba-conteudo {
-                max-width: 300px;
-            }
-
-            .icon {
-                width: 60px;
-            }
-
-            .botoes-container {
-                gap: 8px;
-            }
-
-            .btn-instalar,
-            .paleta-btn {
-                width: 100%;
-                text-align: center;
-                min-width: 120px;
-            }
+            .aba-btn { padding: 8px 15px; font-size: 12px; }
+            .aba-conteudo { max-width: 300px; }
+            .icon { width: 60px; }
+            .botoes-container { gap: 8px; }
+            .btn-instalar, .paleta-btn { width: 100%; text-align: center; min-width: 120px; }
         }
     </style>
 </head>
 <body>
 
     <div class="content">
-
-        <!-- TOPO COM ÍCONE E BOTÕES -->
         <div class="header">
             <div class="header-left">
                 <img class="icon" id="iconApp" src="https://i.imgur.com/pdbLEaE.png" alt="Ícone do App ArteEducar">
             </div>
-
             <div class="botoes-container">
-                <a href="https://artistas-do-quirino.vercel.app/" target="_blank" class="paleta-btn">
-                    🎨 Versão Web
-                </a>
-                <a href="https://github.com/lenilsonxavier-dev/Artistas-do-Quirino/releases/latest/download/pequenosartistasdoquirino.apk" target="_blank" class="btn-instalar">
-                    📲 Baixar App
-                </a>
+                <a href="https://artistas-do-quirino.vercel.app/" target="_blank" class="paleta-btn">🎨 Versão Web</a>
+                <a href="https://github.com/lenilsonxavier-dev/Artistas-do-Quirino/releases/latest/download/pequenosartistasdoquirino.apk" target="_blank" class="btn-instalar">📲 Baixar App</a>
             </div>
         </div>
-
         <div class="erro" id="erroBox"></div>
-
     </div>
 
-    <!-- ABAS OCULTAS NO CANTO INFERIOR ESQUERDO -->
+    <!-- ABAS -->
     <div class="abas-container">
         <div class="abas-botoes">
             <button class="aba-btn" data-aba="sobre">📖 Sobre</button>
@@ -323,7 +213,7 @@
         </div>
 
         <div class="aba-conteudo">
-            <!-- Aba Sobre -->
+            <!-- Sobre -->
             <div class="aba-item" id="aba-sobre">
                 <h3>📖 Sobre o ArteEducar</h3>
                 <p>O ArteEducar é uma plataforma educativa inovadora desenvolvida para tornar o aprendizado mais divertido e interativo para crianças de todas as idades.</p>
@@ -334,7 +224,7 @@
                 <button class="fechar-aba" onclick="fecharAbas()">Fechar</button>
             </div>
 
-            <!-- Aba Recursos -->
+            <!-- Recursos -->
             <div class="aba-item" id="aba-recursos">
                 <h3>🎯 Recursos do App</h3>
                 <ul>
@@ -349,70 +239,58 @@
                 <button class="fechar-aba" onclick="fecharAbas()">Fechar</button>
             </div>
 
-            <!-- Aba Livros (quatro livros) -->
+            <!-- Livros (quatro livros) -->
             <div class="aba-item" id="aba-livros">
                 <h3>📚 Nossos Livros</h3>
 
-                <!-- Livro 1: Bruxa Neura -->
-                <div style="margin-bottom: 15px;">
-                    <p><strong>🧙‍♀️ Bruxa Neura</strong><br>
-                    <em>Uma história encantadora sobre emoções, amizade e o poder da brincadeira.</em></p>
-                    <p><strong>📖 Sinopse:</strong> A bruxinha Neura cria uma poção com cheiro de mofo que espalha tristeza, raiva, ansiedade, nojo e medo. As crianças Julinho, Vivi, Alex e Isa ficam tristes e assustadas. Mas, ao se unirem, descobrem que a amizade e a brincadeira são o antídoto perfeito.</p>
-                    <p><strong>👨‍🏫 Autor:</strong> Professor Leno</p>
-                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/BRUXANEURA.pdf" 
-                       download="Bruxa_Neura_Professor_Leno.pdf" 
-                       class="btn-download-livro" 
-                       id="downloadBruxa">
-                        📥 Baixar (PDF)
-                    </a>
-                </div>
-
-                <div class="livro-divider"></div>
-
-                <!-- Livro 2: IA para Crianças -->
+                <!-- 1. IA para Criança -->
                 <div style="margin-bottom: 15px;">
                     <p><strong>🤖 10 Conceitos Fundamentais da IA para Crianças</strong><br>
                     <em>Guia lúdico para entender inteligência artificial na educação básica.</em></p>
-                    <p><strong>📖 Sinopse:</strong> Este material apresenta, de forma simples e visual, os principais conceitos de IA – como dados, treinamento, algoritmos, padrões, vieses, privacidade, IA generativa, ética e prompts.</p>
+                    <p><strong>📖 Sinopse:</strong> Conceitos de IA – dados, treinamento, algoritmos, padrões, vieses, privacidade, IA generativa, ética e prompts.</p>
                     <p><strong>👨‍🏫 Autor:</strong> Prof. Lenilson Xavier (com apoio do ChatGPT)</p>
-                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/IA_para_criancas.pdf" 
-                       download="10_Conceitos_IA_para_Criancas.pdf" 
-                       class="btn-download-livro" 
-                       id="downloadIA">
-                        📥 Baixar (PDF)
-                    </a>
+                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/ia-para-crianca.pdf"
+                       download="10_Conceitos_IA_para_Criancas.pdf"
+                       class="btn-download-livro" id="downloadIA">📥 Baixar (PDF)</a>
                 </div>
 
                 <div class="livro-divider"></div>
 
-                <!-- Livro 3: Bruxinha Neura -->
+                <!-- 2. Bruxinha Neura -->
                 <div style="margin-bottom: 15px;">
                     <p><strong>🧹 Bruxinha Neura</strong><br>
                     <em>Uma versão especial com atividades e reflexões sobre as emoções.</em></p>
-                    <p><strong>📖 Sinopse:</strong> Este material complementar traz exercícios lúdicos para ajudar as crianças a identificarem e lidarem com sentimentos como tristeza, medo, raiva e ansiedade. Perfeito para usar em sala de aula ou em casa com a família.</p>
+                    <p><strong>📖 Sinopse:</strong> Exercícios lúdicos para ajudar as crianças a identificarem e lidarem com sentimentos como tristeza, medo, raiva e ansiedade.</p>
                     <p><strong>👨‍🏫 Autor:</strong> Professor Leno</p>
-                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/BRUXINHANEURA.pdf" 
-                       download="Bruxinha_Neura_Atividades.pdf" 
-                       class="btn-download-livro" 
-                       id="downloadBruxinha">
-                        📥 Baixar (PDF)
-                    </a>
+                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/bruxinhaneura.pdf"
+                       download="Bruxinha_Neura.pdf"
+                       class="btn-download-livro" id="downloadBruxinha">📥 Baixar (PDF)</a>
                 </div>
 
                 <div class="livro-divider"></div>
 
-                <!-- Livro 4: A Dança Caótica (novo) -->
+                <!-- 3. Bruxinha Neura - Poção da Confusão -->
+                <div style="margin-bottom: 15px;">
+                    <p><strong>🧪 Bruxinha Neura – Poção da Confusão</strong><br>
+                    <em>Uma aventura sobre a poção mágica que mexe com as emoções.</em></p>
+                    <p><strong>📖 Sinopse:</strong> Nesta história, a Bruxinha Neura prepara uma poção especial que causa confusão nos sentimentos das crianças. Uma narrativa lúdica sobre emoções, escolhas e amizade.</p>
+                    <p><strong>👨‍🏫 Autor:</strong> Professor Leno</p>
+                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/abruxinhaneura_pocao_da_confusao.pdf"
+                       download="A_Bruxinha_Neura_Pocao_da_Confusao.pdf"
+                       class="btn-download-livro" id="downloadPocao">📥 Baixar (PDF)</a>
+                </div>
+
+                <div class="livro-divider"></div>
+
+                <!-- 4. A Dança Caótica -->
                 <div>
                     <p><strong>🕺 A Dança Caótica</strong><br>
                     <em>Uma aventura cheia de ritmo, movimento e imaginação.</em></p>
-                    <p><strong>📖 Sinopse:</strong> Este livro convida as crianças a explorarem o corpo, a música e a expressão artística de forma divertida e caótica. Uma história que celebra a liberdade criativa e a importância de se movimentar.</p>
+                    <p><strong>📖 Sinopse:</strong> Este livro convida as crianças a explorarem o corpo, a música e a expressão artística de forma divertida e caótica.</p>
                     <p><strong>👨‍🏫 Autor:</strong> Professor Leno</p>
-                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/A_%20Danca_Caotica.pdf" 
-                       download="A_Danca_Caotica.pdf" 
-                       class="btn-download-livro" 
-                       id="downloadDanca">
-                        📥 Baixar (PDF)
-                    </a>
+                    <a href="https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/a_danca_caotica.pdf"
+                       download="A_Danca_Caotica.pdf"
+                       class="btn-download-livro" id="downloadDanca">📥 Baixar (PDF)</a>
                 </div>
 
                 <button class="fechar-aba" onclick="fecharAbas()" style="margin-top: 15px;">Fechar</button>
@@ -429,13 +307,10 @@
         function abrirAba(abaId) {
             abaItems.forEach(item => item.classList.remove('ativo'));
             abaBtns.forEach(btn => btn.classList.remove('ativo'));
-
             const abaSelecionada = document.getElementById(`aba-${abaId}`);
             if (abaSelecionada) abaSelecionada.classList.add('ativo');
-
             const btnClicado = document.querySelector(`[data-aba="${abaId}"]`);
             if (btnClicado) btnClicado.classList.add('ativo');
-
             abasContainer.style.display = 'block';
         }
 
@@ -453,17 +328,12 @@
 
         fecharAbas();
 
-        // =====================================================
-        //  FALLBACK PARA DOWNLOAD DOS PDFs (com fetch)
-        //  Se falhar, abre em nova aba.
-        // =====================================================
+        // Fallback de download
         function setupDownloadFallback(linkId, fileUrl) {
             const link = document.getElementById(linkId);
             if (!link) return;
-
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-
                 fetch(fileUrl)
                     .then(response => {
                         if (!response.ok) throw new Error('Arquivo não encontrado');
@@ -485,15 +355,13 @@
             });
         }
 
-        // Configurar fallback para os quatro livros
-        setupDownloadFallback('downloadBruxa', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/BRUXANEURA.pdf');
-        setupDownloadFallback('downloadIA', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/aiaparacrian%C3%A7as.pdf');
-        setupDownloadFallback('downloadBruxinha', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/BRUXINHANEURA.pdf');
-        setupDownloadFallback('downloadDanca', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/A_%20Danca_Caotica.pdf');
+        // Fallback — quatro livros
+        setupDownloadFallback('downloadIA', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/ia-para-crianca.pdf');
+        setupDownloadFallback('downloadBruxinha', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/bruxinhaneura.pdf');
+        setupDownloadFallback('downloadPocao', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/abruxinhaneura_pocao_da_confusao.pdf');
+        setupDownloadFallback('downloadDanca', 'https://raw.githubusercontent.com/lenilsonxavier-dev/arteeducar-loja/main/public/a_danca_caotica.pdf');
 
-        // =====================================================
-        //  VERIFICAÇÃO DE IMAGENS
-        // =====================================================
+        // Verificação de imagens
         function verificarImagens() {
             const erroBox = document.getElementById("erroBox");
             const imgFundo = new Image();
@@ -503,7 +371,6 @@
                 erroBox.innerText = "❌ Erro: Imagem de fundo não pode ser carregada.";
                 setTimeout(() => { erroBox.style.display = "none"; }, 5000);
             };
-
             const icon = document.getElementById("iconApp");
             icon.onerror = () => {
                 erroBox.style.display = "block";
@@ -511,7 +378,6 @@
                 setTimeout(() => { erroBox.style.display = "none"; }, 5000);
             };
         }
-
         window.onload = verificarImagens;
     </script>
 
